@@ -1,0 +1,20 @@
+{
+  "name": "iota.hub.js",
+  "version": "0.0.1",
+  "description": "Stateful IOTA client in js",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava && standard"
+  },
+  "author": "Chris Dukakis",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "iota.crypto.js": "git+https://github.com/iotaledger/iota.crypto.js.git",
+    "iota.lib.js": "^0.4.2",
+    "pify": "^3.0.0"
+  },
+  "devDependencies": {
+    "ava": "^0.24.0",
+    "standard": "^10.0.3"
+  }
+}
