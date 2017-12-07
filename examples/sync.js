@@ -2,14 +2,14 @@ const IOTAHub = require('../index')
 const Hub = IOTAHub.Hub
 const { sync } = IOTAHub.sync
 
-const hub = new Hub('https://localhost:14265')
+const hub = new Hub('http://localhost:14265')
 
-hub.on('sweep', (txs) => {
-  console.log('Sweep', txs)
+hub.on('sweep', (tx) => {
+  console.log('Sweep:', tx.hash, tx.value)
 })
 
 hub.on('deposit', (tx) => {
-  console.log('Deposit', tx.hash, tx.value)
+  console.log('Deposit:', tx.hash, tx.value)
 })
 
 const state = {
@@ -17,7 +17,7 @@ const state = {
   inputs: [],
   transfers: [],
   indexes: [],
-  lastKeyIndex: 0
+  keyIndex: 0
 }
 
 function example () {
@@ -25,14 +25,15 @@ function example () {
   sync(hub, state, {
     seed: 'SEED',
     security: 2,
-    rescan: true
+    rescan: true,
+    enableEvents: true
   })
   .then(state => {
-    console.log('Addresses:', state.addresses)
+    console.log('Addresses:', state.addresses.sort((a, b) => a.index - b.index).map(a => a.address + ', ' + a.index + ', ' + a.balance))
     console.log('Inputs:', state.inputs)
+    console.log('Transfers:', state.transfers.map(tx => tx.hash + ', ' + tx.value + ', ' + tx.persistence))
     console.log('Used key indexes:', state.indexes)
-    console.log('Transfers:', state.transfers)
-    console.log('Last key index:', state.lastIndex)
+    console.log('Last key index:', state.keyIndex)
   })
   .catch(err => console.log(err.stack || err))
 }
