@@ -22,8 +22,7 @@ const state = {
 
 function example () {
   console.log('Syncing...')
-  sync(hub, state, {
-    seed: 'SEED',
+  sync(hub, state, 'SEED', {
     security: 2,
     rescan: true,
     enableEvents: true
@@ -31,7 +30,7 @@ function example () {
   .then(state => {
     console.log('Addresses:', state.addresses.sort((a, b) => a.index - b.index).map(a => a.address + ', ' + a.index + ', ' + a.balance))
     console.log('Inputs:', state.inputs)
-    console.log('Transfers:', state.transfers.map(tx => tx.hash + ', ' + tx.value + ', ' + tx.persistence))
+    console.log('Transfers:', state.transfers.map(tx => tx.hash + ', ' + tx.address + ',' + tx.value + ', ' + tx.persistence))
     console.log('Used key indexes:', state.indexes)
     console.log('Last key index:', state.keyIndex)
   })
