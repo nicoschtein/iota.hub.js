@@ -45,11 +45,11 @@ sync(hub, state, seed, {
   console.log('Attaching to tangle...')
 
   // Attach to tangle and broadcast transactions
-  return sendTrytes(trytes, 3, 14) // Use depth 3, minWeightMagnitude 14
+  return sendTrytes(hub, state, trytes, 3, 14) // Use depth 3, minWeightMagnitude 14
 })
 
 // lists attached transactions
-.then(txs => console.log('Attached transactions:', txs))
+.then(({ state, transactions }) => console.log('Attached transactions:', transactions))
 
 // Handle errors
 .catch(err => console.log(err.stack || err))
