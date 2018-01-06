@@ -1,7 +1,7 @@
 const IOTAHub = require('../index')
 const Hub = IOTAHub.Hub
 const { sync } = IOTAHub.sync
-const { transfer, sendTrytes } = IOTAHub.transfer
+const { prepareTransfers, sendTrytes } = IOTAHub.transfer
 
 const hub = new Hub('http://localhost:14700')
 
@@ -27,7 +27,7 @@ sync(hub, state, seed, {
 .then(state => {
   console.log('Preparing transfers...')
 
-  return transfer(hub, state, seed, [
+  return prepareTransfers(hub, state, seed, [
     { // Transfer object
       address: 'IMMYZXWKLKVGEHJIUZLBNJJTOXBQWLLDIOIJKXTGWUFECLKCLKEVVCWQYKTCLENSPPVQIWKNXR99JGAAT',
       value: 1

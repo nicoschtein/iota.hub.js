@@ -4,7 +4,8 @@
   "description": "Stateful IOTA client in js",
   "main": "index.js",
   "scripts": {
-    "test": "ava && standard"
+    "test": "ava && standard",
+    "docs": "jsdoc2md --template README.hbs --files lib/*.js > README.md"
   },
   "author": "Chris Dukakis",
   "license": "GPL-3.0",
